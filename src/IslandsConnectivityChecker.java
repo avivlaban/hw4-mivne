@@ -13,12 +13,11 @@ public class IslandsConnectivityChecker {
 		try {
 			image = ImageReader.readImage(bmpPath);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		UTF = new UpTreeForest(image.getHeight() * image.getWidth());
 		numComponents = (image.getHeight() * image.getWidth());
-		
+		//Going over the image and connect islands and seas
 		for(int i = 0; i < image.getWidth(); i++){
 			for(int j = 0; j < image.getHeight(); j++){
 				
@@ -39,7 +38,7 @@ public class IslandsConnectivityChecker {
 	public void connectCoords(int x1, int y1, int x2, int y2){
 		int firstLocation = UTF.find(position(x1, y1));
 		int secondLocation = UTF.find(position(x2, y2));
-		
+		//Connects two elements only if the two elements have the same type and have a different ROOT
 		if((image.getLandType(x1, y1) == image.getLandType(x2, y2)) && (firstLocation != secondLocation)){
 			UTF.union(firstLocation, secondLocation);
 			numComponents--;
@@ -61,6 +60,7 @@ public class IslandsConnectivityChecker {
 	}
 	
 	private int position(int x1, int y1){
+		//Finds the location of (x,y) in a single array - the tree.
 		int position = ((image.getWidth()*y1) + x1);
 		return position;
 	}

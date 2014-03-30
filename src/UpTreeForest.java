@@ -7,11 +7,12 @@ public class UpTreeForest {
 	private int numberOfSets;
 	
 	public UpTreeForest(int size){
+		//Creating new array to represent every element's location and initalizing it to ROOT
 		up = new int[size];
 		for(int i = 0; i < up.length; i++){
 			up[i] = -1;
 		}
-		
+		//Creating new array to represent number of elements in every set
 		weight = new int[size];
 		for(int i = 0; i < weight.length; i++){
 			weight[i] = 1;
@@ -21,7 +22,7 @@ public class UpTreeForest {
 	}
 	
 	public void union(int i, int j){
-		
+		//If one of the givven int is not a ROOT returnes error
 		if((up[i] != ROOT) || (up[j] != ROOT)){
 			throw new IllegalArgumentException("One or two of the givven integers aren't representatives");
 		}
